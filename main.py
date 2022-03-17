@@ -34,7 +34,8 @@ def format_number(contacts_list):
 def duplicates_join(contacts_list):
   contacts_list_updated = []
   for person_1 in contacts_list:
-    for person_2 in contacts_list:
+    contacts_list_updated.append(person_1)
+    for person_2 in contacts_list_updated:
       if person_1[0] == person_2[0] and person_1[1] == person_2[1] and person_1 is not person_2:
         if person_1[2] == '':
           person_1[2] = person_2[2]
@@ -46,9 +47,7 @@ def duplicates_join(contacts_list):
           person_1[5] = person_2[5]
         if person_1[6] == '':
           person_1[6] = person_2[6]
-  for card in contacts_list:
-    if card not in contacts_list_updated:
-      contacts_list_updated.append(card)
+        contacts_list_updated.remove(person_2)
   return contacts_list_updated
 
 # TODO 2: сохранение получившихся данны в другой файл
@@ -61,5 +60,4 @@ if __name__ == '__main__':
   address_book = format_last_first_sur_name(contacts_list)
   address_book = format_number(address_book)
   address_book = duplicates_join(address_book)
-  pprint(address_book)
   write_file(address_book)
